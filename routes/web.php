@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\AgendaController;
 use App\Http\Controllers\DentistaController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\HistoriaClinicaController;
+use App\Http\Controllers\ReporteController;
 
 
 //Route::get('/inicio', function () {
@@ -200,3 +202,32 @@ Route::middleware(['auth', 'role:usuario'])->group(function () {
 Route::get('/dentista/agenda', [DentistaController::class, 'agenda'])
     ->name('agenda.dentista')
     ->middleware(['auth', 'role:dentista']);
+
+Route::get('/historia/{paciente}', [HistoriaClinicaController::class, 'show'])
+    ->name('historia.show');
+
+Route::put('/historia/{id}', [HistoriaClinicaController::class, 'update'])
+    ->name('historia.update');
+
+Route::patch('/citas/{id}/realizada',
+    [AgendaController::class, 'marcarRealizada'])
+    ->name('citas.marcarRealizada');
+
+Route::patch('/citas/{id}/deshacer',
+    [AgendaController::class, 'desmarcarRealizada'])
+    ->name('citas.desmarcarRealizada');
+
+Route::get('/reportes/citas', [ReporteController::class, 'citas'])->name('reportes.citas');
+
+Route::get('/reportes/citas/excel', [ReporteController::class, 'exportarExcel'])
+    ->name('reportes.citas.excel');
+
+Route::get('/reportes/productividad', [ReporteController::class, 'productividad'])
+    ->name('reportes.productividad');
+
+Route::get('/reportes/productividad/excel', [ReporteController::class, 'exportarProductividadExcel'])
+    ->name('reportes.productividad.excel');
+
+Route::get('reportes', [ReporteController::class, 'index'])
+    ->name('reportes')
+    ->middleware(['auth']);

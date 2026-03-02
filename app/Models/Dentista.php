@@ -14,12 +14,8 @@ class Dentista extends Model
     'especialidad',
     'telefono',
     'estado',
+    'dias_laborales',
 ];
-
-    public function consultorios()
-    {
-        return $this->belongsTo(Consultorio::class);
-    }
 
     public function horarios()
     {

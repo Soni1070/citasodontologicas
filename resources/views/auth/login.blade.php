@@ -61,10 +61,12 @@
 
       <!-- /.social-auth-links -->
 
-      <p class="mb-1">
+      <!-- Olvidé mi contraseña PENDIENTE SISTEMA PÚBLICO -->
+      <!-- <p class="mb-1">
         <a href="forgot-password.html">Olvidé mi contraseña</a>
       </p>
-      <p class="mb-0">
+      <!-- Registrar nuevo usuario PENDIENTE SISTEMA PÚBLICO -->
+      <!--<p class="mb-0">
         <a href="{{ route('register') }}" class="text-center">Registrar nuevo usuario</a>
       </p>
     </div>

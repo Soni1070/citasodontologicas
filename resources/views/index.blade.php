@@ -109,7 +109,7 @@
             <div class="why-box" data-aos="zoom-out" data-aos-delay="200">
               <h3>Reserva tu cita odontológica</h3>
               <div class="text-center">
-                <a href="{{ route('login') }}" class="more-btn"><span>Reservar ahora</span> <i class="bi bi-chevron-right"></i></a>
+                <p class="more-btn mb-0 fs-2 fw-bold"> 📞 222 234 5678 </p>
               </div>
             </div>
           </div><!-- End Why Box -->

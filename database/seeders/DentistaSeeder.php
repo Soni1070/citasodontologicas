@@ -41,7 +41,7 @@ class DentistaSeeder extends Seeder
                 ]
             );
 
-            $user->assignRole('dentista');
+            $user->syncRoles('dentista');
 
             Dentista::firstOrCreate(
                 ['user_id' => $user->id],
@@ -52,6 +52,10 @@ class DentistaSeeder extends Seeder
                     'especialidad' => $d['especialidad'],
                     'telefono' => $d['telefono'],
                     'estado' => 'activo',
+                    'dias_laborales' => [
+                        'lunes', 'martes', 'miercoles', 'jueves', 'viernes'
+                    ],
+                    'consultorio_id' => 1,
                 ]
             );
         }

@@ -58,6 +58,9 @@ class SecretariaController extends Controller
         $usuario->password = Hash::make($request->password);
         $usuario->save();
 
+        // ASIGNAR ROL SECRETARIA
+        $usuario->assignRole('secretaria');
+
         //crear secretaria        
         $secretaria = new Secretaria();
         $secretaria->nombres = $request->nombres;

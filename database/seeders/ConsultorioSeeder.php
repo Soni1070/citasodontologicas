@@ -12,7 +12,7 @@ class ConsultorioSeeder extends Seeder
         Consultorio::firstOrCreate(
             ['nombre' => 'Consultorio General'],
             [
-                'ubicacion' => 'Planta baja',
+                'ubicacion' => 'Piso 1',
                 'capacidad' => '1 paciente',
                 'telefono' => '5551234567',
                 'especialidad' => 'Odontología general',
@@ -23,7 +23,7 @@ class ConsultorioSeeder extends Seeder
         Consultorio::firstOrCreate(
             ['nombre' => 'Consultorio Ortodoncia'],
             [
-                'ubicacion' => 'Primer piso',
+                'ubicacion' => 'Piso 2',
                 'capacidad' => '1 paciente',
                 'telefono' => null,
                 'especialidad' => 'Ortodoncia',

@@ -24,4 +24,9 @@ class Paciente extends Model
         'contacto_emergencia',
         'observaciones',
     ];
+
+    public function historiaClinica()
+{
+    return $this->hasOne(HistoriaClinica::class);
+}
 }

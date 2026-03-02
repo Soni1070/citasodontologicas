@@ -55,13 +55,14 @@ class User extends Authenticatable
     {
         return $this->hasOne(Dentista::class);
     }
+}
 
-    protected static function booted()
-{
-    static::created(function ($user) {
-        if ($user->roles->isEmpty()) {
-            $user->assignRole('usuario');
-        }
-    });
-}
-}
+    //protected static function booted()
+//{
+    //static::created(function ($user) {
+       // if ($user->roles->isEmpty()) {
+          //  $user->assignRole('usuario');
+       // }
+    //});
+//}
+

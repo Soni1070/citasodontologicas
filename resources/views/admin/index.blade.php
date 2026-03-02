@@ -122,6 +122,21 @@
 </div>
 @endrole
 
+<div class="col-lg-3 col-6">
+  <div class="small-box bg-dark">
+    <div class="inner">
+      <h3>Reportes</h3>
+      <p>Estadísticas del sistema</p>
+    </div>
+    <div class="icon">
+      <i class="bi bi-bar-chart-line-fill"></i>
+    </div>
+    <a href="{{ route('reportes') }}" class="small-box-footer">
+      Ver reportes <i class="fas fa-arrow-circle-right"></i>
+    </a>
+  </div>
+</div>
+
           </div> <!-- /.row de small-box -->
 
 @endsection

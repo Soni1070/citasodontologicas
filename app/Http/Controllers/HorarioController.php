@@ -116,7 +116,14 @@ public function horariosPorConsultorio($consultorioId)
      */
     public function edit(Horario $horario)
     {
-        //
+         $dentistas = Dentista::where('estado', 'Activo')->get();
+    $consultorios = Consultorio::where('estado', 'Activo')->get();
+
+    return view('admin.horarios.edit', compact(
+        'horario',
+        'dentistas',
+        'consultorios'
+    )); 
     }
 
     /**
@@ -124,7 +131,42 @@ public function horariosPorConsultorio($consultorioId)
      */
     public function update(Request $request, Horario $horario)
     {
-        //
+         $request->validate([
+        'dia' => 'required|string|max:20',
+        'hora_inicio' => 'required',
+        'hora_fin' => 'required|after:hora_inicio',
+        'dentista_id' => 'required|exists:dentistas,id',
+        'consultorio_id' => 'required|exists:consultorios,id',
+    ]);
+
+    // Validar cruce de horarios (excluyendo el actual)
+    $existe = Horario::where('consultorio_id', $request->consultorio_id)
+        ->where('dia', $request->dia)
+        ->where('id', '!=', $horario->id)
+        ->where(function ($query) use ($request) {
+            $query->where('hora_inicio', '<', $request->hora_fin)
+                  ->where('hora_fin', '>', $request->hora_inicio);
+        })
+        ->exists();
+
+    if ($existe) {
+        return back()
+            ->withErrors([
+                'hora_inicio' => 'Este consultorio ya tiene un horario en ese rango'
+            ])
+            ->withInput();
+    }
+    $horario->update([
+        'dia' => $request->dia,
+        'hora_inicio' => $request->hora_inicio,
+        'hora_fin' => $request->hora_fin,
+        'dentista_id' => $request->dentista_id,
+        'consultorio_id' => $request->consultorio_id,
+    ]);
+
+    return redirect()->route('admin.horarios.index')
+        ->with('success', 'Horario actualizado correctamente')
+        ->with('icon', 'success');
     }
 
     /**
@@ -132,6 +174,10 @@ public function horariosPorConsultorio($consultorioId)
      */
     public function destroy(Horario $horario)
     {
-        //
+        $horario->delete();
+
+    return redirect()->route('admin.horarios.index')
+        ->with('success', 'Horario eliminado correctamente')
+        ->with('icon', 'success');
     }
 }

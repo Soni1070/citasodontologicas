@@ -14,7 +14,13 @@ class Cita extends Model
     'paciente_id',
     'dentista_id',
     'consultorio_id',
-    'procedimiento'
+    'procedimiento',
+    'estado', 
+];
+
+    protected $casts = [
+    'fecha_inicio' => 'datetime',
+    'fecha_fin' => 'datetime',
 ];
 
     public function paciente()
@@ -30,5 +36,10 @@ class Cita extends Model
     public function consultorio()
     {
         return $this->belongsTo(Consultorio::class);
+    }
+
+    public function seguimientos()
+    {
+    return $this->hasMany(Seguimiento::class);
     }
 }

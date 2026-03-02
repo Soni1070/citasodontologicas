@@ -16,7 +16,7 @@
             </div>
 
             <div class="card-body">
-            <form action="{{ route('admin.dentistas.store') }}" method="POST">
+    <form action="{{ route('admin.dentistas.store') }}" method="POST">
                 @csrf
         <div class="row">
                 {{-- nombres --}}
@@ -130,7 +130,6 @@
                     @enderror
                 </div>
                 </div>
-        </div>  
                
                 {{-- BOTONES --}}
                 <div class="text-right mt-4">
@@ -141,9 +140,8 @@
                     <button type="submit" class="btn btn-primary">
                         Registrar nuevo
                     </button>
-                 
-                </div>
-            </form>
+                    </div>
+        </form>
             </div>
         </div>
 

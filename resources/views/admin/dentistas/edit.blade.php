@@ -10,7 +10,7 @@
 <div class="row justify-content-center">
     <div class="col-md-12">
 
-        <div class="card card-outline card-success" style="max-width: 1000px; margin: auto;">
+        <div class="card card-outline card-warning" style="max-width: 1000px; margin: auto;">
             <div class="card-header text-center">
                 <h3 class="card-title">Actualizar datos</h3>
             </div>
@@ -139,7 +139,7 @@
                         Cancelar
                     </a>
 
-                    <button type="submit" class="btn btn-success">
+                    <button type="submit" class="btn btn-warning">
                         Actualizar Especialista
                     </button>
                  

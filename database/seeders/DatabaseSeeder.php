@@ -46,21 +46,6 @@ $secretaria2 = User::firstOrCreate(
     ]
 );
 
-$dentista1 = User::firstOrCreate(
-    ['email' => 'dentista1@admin.com'],
-    [
-        'name' => 'Dentista 1',
-        'password' => Hash::make('password'),
-    ]
-);
-
-$dentista2 = User::firstOrCreate(
-    ['email' => 'dentista2@admin.com'],
-    [
-        'name' => 'Dentista 2',
-        'password' => Hash::make('password'),
-    ]
-);
         // Limpiar cache de permisos
         app()[PermissionRegistrar::class]->forgetCachedPermissions();
 
@@ -73,7 +58,7 @@ $dentista2 = User::firstOrCreate(
         $secretaria = Role::firstOrCreate(['name' => 'secretaria', 'guard_name' => 'web']);
         $dentista = Role::firstOrCreate(['name' => 'dentista', 'guard_name' => 'web']);
         $paciente = Role::firstOrCreate(['name' => 'paciente', 'guard_name' => 'web']);
-        Role::firstOrCreate(['name' => 'usuario', 'guard_name' => 'web']);
+        //Role::firstOrCreate(['name' => 'usuario', 'guard_name' => 'web']);
 
         /*
         |--------------------------------------------------------------------------
@@ -152,11 +137,6 @@ foreach ($permisos as $permiso) {
             'secretaria2@admin.com',
         ])->each(fn ($user) => $user->syncRoles('secretaria'));
 
-        User::whereIn('email', [
-            'dentista1@admin.com',
-            'dentista2@admin.com',
-        ])->each(fn ($user) => $user->syncRoles('dentista'));
-
         /*
         |--------------------------------------------------------------------------
         | OTROS SEEDERS
@@ -166,6 +146,7 @@ foreach ($permisos as $permiso) {
             ConsultorioSeeder::class,
             HorarioSeeder::class,
             PacienteSeeder::class,
+            DentistaSeeder::class,
         ]);
     }
 }

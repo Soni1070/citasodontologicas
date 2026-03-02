@@ -21,6 +21,8 @@ return new class extends Migration
             $table->string('telefono')->nullable();
             $table->string('estado');
 
+            $table->json('dias_laborales')->nullable();
+
             $table->foreignId('user_id')
                 ->unique()
                 ->constrained()

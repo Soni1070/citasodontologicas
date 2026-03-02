@@ -45,6 +45,7 @@ class DentistaController extends Controller
         'estado' => 'nullable|string|max:50',
         'email' => 'required|email|max:255|unique:users,email',
         'password' => 'required|string|min:8|confirmed',
+        
     ]);
 
     DB::transaction(function () use ($datos) {
@@ -68,6 +69,7 @@ class DentistaController extends Controller
             'especialidad' => $datos['especialidad'],
             'telefono' => $datos['telefono'],
             'estado' => $datos['estado'] ?? 'Activo',
+
         ]);
     });
 
