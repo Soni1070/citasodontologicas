@@ -193,36 +193,38 @@ public function agenda(Request $request)
     // 1. Dentista logueado
     $dentista = Dentista::where('user_id', auth()->id())->firstOrFail();
 
-    // 2. Vista solicitada (dia | semana | mes)
-    $vista = $request->get('vista', 'dia'); // por defecto: HOY
+    // 2. Vista solicitada
+    $vista = $request->get('vista', 'dia');
 
-    // 3. Query base
-    $query = Cita::with(['paciente', 'consultorio'])
-        ->where('dentista_id', $dentista->id);
+    // 3. Fecha base (si no viene, usar hoy)
+    $fecha = $request->get('fecha')
+        ? Carbon::parse($request->get('fecha'))
+        : Carbon::now();
 
-    // 4. Filtros según botón
+    // 4. Determinar rango según vista
     if ($vista === 'dia') {
-        $query->whereDate('fecha_inicio', Carbon::today());
+        $inicio = $fecha->copy()->startOfDay();
+        $fin = $fecha->copy()->endOfDay();
     }
 
     if ($vista === 'semana') {
-        $query->whereBetween('fecha_inicio', [
-            Carbon::now()->startOfWeek(),
-            Carbon::now()->endOfWeek()
-        ]);
+        $inicio = $fecha->copy()->startOfWeek();
+        $fin = $fecha->copy()->endOfWeek();
     }
 
     if ($vista === 'mes') {
-        $query->whereMonth('fecha_inicio', Carbon::now()->month)
-              ->whereYear('fecha_inicio', Carbon::now()->year);
+        $inicio = $fecha->copy()->startOfMonth();
+        $fin = $fecha->copy()->endOfMonth();
     }
 
-    // 5. Obtener citas ordenadas
-    $citas = $query->orderBy('fecha_inicio')->get();
+    // 5. Obtener citas dentro del rango
+    $citas = Cita::with(['paciente', 'consultorio'])
+        ->where('dentista_id', $dentista->id)
+        ->whereBetween('fecha_inicio', [$inicio, $fin])
+        ->orderBy('fecha_inicio')
+        ->get();
 
-    // 6. Enviar a la vista que YA EXISTE
-    return view('agenda.dentista', compact('citas', 'vista'));
+    return view('agenda.dentista', compact('citas', 'vista', 'fecha'));
 }
-
 
 }

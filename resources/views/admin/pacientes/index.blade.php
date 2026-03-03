@@ -29,9 +29,9 @@
                 </div>
                 <!-- /.card-tools -->
               </div>
-              <!-- /.card-header -->
-              <div class="card-body">
-
+  <!-- /.card-header -->
+ <div class="card-body">
+<div class="table-responsive">
   <table id="example1" class="table table-striped table-bordered table-hover table-sm">
    <thead style="background-color: #AABCEE;">
     <tr>
@@ -43,7 +43,7 @@
      <td style="text-align: center;"><b>Genero</b></td>
      <td style="text-align: center;"><b>Telefono</b></td>
      <td style="text-align: center;"><b>Direccion</b></td>
-     <td style="text-align: center;"><b>Grupo_Sanguineo</b></td>
+     <td style="text-align: center;"><b>RH</b></td>
      <td style="text-align: center;"><b>Alergias</b></td>
      <td style="text-align: center;"><b>Observaciones</b></td>
      <td style="text-align: center;"><b>Acciones</b></td>
@@ -82,6 +82,7 @@
     @endforeach
   </tbody>
 </table> 
+</div> <!-- table-responsive -->
 <!-- Page specific script -->
 <script>
                         $(function () {
@@ -142,4 +143,5 @@
           </div>
 
 </div>
+
 @endsection

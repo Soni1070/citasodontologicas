@@ -4,23 +4,57 @@
 
 <h1 class="mb-4">Mi Agenda</h1>
 
+@php
+    $fecha = $fecha ?? \Carbon\Carbon::now();
+    $vista = $vista ?? 'dia';
+@endphp
+
 <div class="card">
     <div class="card-body">
 
     <div class="mb-3">
-    <a href="{{ route('agenda.dentista', ['vista' => 'dia']) }}"
+    <a href="{{ route('agenda.dentista', ['vista' => 'dia', 'fecha' => $fecha->toDateString()]) }}"
        class="btn btn-primary btn-sm">
-        Hoy
+    Día
     </a>
 
-    <a href="{{ route('agenda.dentista', ['vista' => 'semana']) }}"
+    <a href="{{ route('agenda.dentista', ['vista' => 'semana', 'fecha' => $fecha->toDateString()]) }}"
        class="btn btn-secondary btn-sm">
-        Semana
+       Semana
     </a>
 
-    <a href="{{ route('agenda.dentista', ['vista' => 'mes']) }}"
-       class="btn btn-info btn-sm">
+    <a href="{{ route('agenda.dentista', ['vista' => 'mes', 'fecha' => $fecha->toDateString()]) }}"
+    class="btn btn-info btn-sm">
         Mes
+    </a>
+</div>
+
+<div class="mb-3">
+
+    {{-- Anterior --}}
+    <a href="{{ route('agenda.dentista', [
+        'vista' => $vista,
+        'fecha' => $vista == 'mes'
+            ? $fecha->copy()->subMonth()->toDateString()
+            : ($vista == 'semana'
+                ? $fecha->copy()->subWeek()->toDateString()
+                : $fecha->copy()->subDay()->toDateString())
+    ]) }}"
+    class="btn btn-outline-dark btn-sm">
+        ← Anterior
+    </a>
+
+    {{-- Siguiente --}}
+    <a href="{{ route('agenda.dentista', [
+        'vista' => $vista,
+        'fecha' => $vista == 'mes'
+            ? $fecha->copy()->addMonth()->toDateString()
+            : ($vista == 'semana'
+                ? $fecha->copy()->addWeek()->toDateString()
+                : $fecha->copy()->addDay()->toDateString())
+    ]) }}"
+    class="btn btn-outline-dark btn-sm">
+        Siguiente →
     </a>
 
 </div>

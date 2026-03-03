@@ -152,8 +152,8 @@
           <tbody>
             @foreach($citasTabla as $cita)
             <tr>
-              <td>{{ \Carbon\Carbon::parse($cita->inicio)->format('d/m/Y') }}</td>
-              <td>{{ \Carbon\Carbon::parse($cita->inicio)->format('H:i') }}</td>
+              <td>{{ \Carbon\Carbon::parse($cita->fecha_inicio)->format('d/m/Y') }}</td>
+              <td>{{ \Carbon\Carbon::parse($cita->fecha_inicio)->format('H:i') }}</td>
               <td>{{ $cita->paciente->nombres }} {{ $cita->paciente->apellidos }}</td>
               <td>{{ $cita->dentista->nombres }} {{ $cita->dentista->apellidos }}</td>
               <td>
